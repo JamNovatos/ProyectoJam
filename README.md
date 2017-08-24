@@ -12,3 +12,6 @@ Vamos a usar Piskel para creación de imágenes. Hemos comprobado cómo crear hi
 
 Trabajando en la idea
 Desarrollando la idea. Pug en busca de la croqueta.
+
+Sistema de combate:
+Fuerza, Agilidad, Carisma, Olfato
