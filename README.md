@@ -15,3 +15,5 @@ Desarrollando la idea. Pug en busca de la croqueta.
 
 Sistema de combate:
 Fuerza, Agilidad, Carisma, Olfato
+
+Desarrollando la historia en Twine.
