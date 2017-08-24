@@ -1,5 +1,9 @@
-# ProyectoJam
+# CroQuest
 
+## v0.1 - MVP
+CroQuest.html
+
+##Preparación
 Tema de la Jam: Croquetas y Pugs.
 
 Herramienta decidida: Twine
