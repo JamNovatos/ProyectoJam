@@ -11,3 +11,4 @@ Organización del trabajo: Idea de proyecto. Resumen. División de tareas. Progr
 Vamos a usar Piskel para creación de imágenes. Hemos comprobado cómo crear historias en Twine.
 
 Trabajando en la idea
+Desarrollando la idea. Pug en busca de la croqueta.
