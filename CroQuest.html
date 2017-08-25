@@ -11,12 +11,7 @@
 
 <tw-story></tw-story>
 
-<tw-storydata name="CroQuest" startnode="37" creator="Twine" creator-version="2.1.3" ifid="A5552E28-7EDE-40AF-AA53-2BEC06554AED" format="Harlowe" format-version="2.0.1" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">img {
-  float: right;
-}
-.hojaPersonaje {
-  float: left;
-}
+<tw-storydata name="CroQuest" startnode="37" creator="Twine" creator-version="2.1.3" ifid="A5552E28-7EDE-40AF-AA53-2BEC06554AED" format="Harlowe" format-version="2.0.1" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">
 </style><script role="script" id="twine-user-script" type="text/twine-javascript">
 </script><tw-passagedata pid="1" name="Elección de protagonista" tags="" position="23,3">Eres $sexo pug. 
 &lt;img src=&quot;PugBasico.gif&quot; width=&quot;300px&quot; height=&quot;300px&quot; /&gt;
@@ -44,20 +39,21 @@ Tu *Agilidad* es $agilidad.
 (go-to: &quot;clase seleccionada&quot;)
 [[clase seleccionada]]</tw-passagedata><tw-passagedata pid="6" name="Vives en el Reino Unido" tags="" position="171,358">Te gustaría comer una [[croqueta de jamón]]</tw-passagedata><tw-passagedata pid="7" name="croqueta de jamón" tags="" position="322,356">Pero en el Reino Unido... ¡Sólo hay croquetas de patata!
 Te preguntas cómo llegar hasta una croqueta de jamón.
+(print: &quot;&lt;img src=&#x27;PensamientoCroqueta.gif&#x27; width=&#x27;300px&#x27; height=&#x27;300px&#x27; /&gt;&quot;)
+(print: &quot;&lt;img src=&#x27;Pug&quot; + $clase + &quot;.gif&#x27; width=&#x27;300px&#x27; height=&#x27;300px&#x27; /&gt;&quot;)
 [[Vas a una tienda]]
 [[Viajas a otro país]]
 [[Decides que las croquetas de patata no están tan mal]]</tw-passagedata><tw-passagedata pid="8" name="Vas a una tienda" tags="" position="475,503">Vas hasta una tienda de productos de importación. 
 
 Nada más entrar, un queso francés te golpea con su olor. ¡Y con sus puños!
 (set: $vidaEnemigo to 7)
-[[Defiéndete]]</tw-passagedata><tw-passagedata pid="9" name="Viajas a otro país" tags="" position="1070,171">Sales en busca de una [[agencia de viajes]].</tw-passagedata><tw-passagedata pid="10" name="Decides que las croquetas de patata no están tan mal" tags="" position="380,1066">Comes unas cuantas croquetas de patata. Con salsa HP están bastante bien.
+[[Defiéndete]]</tw-passagedata><tw-passagedata pid="9" name="Viajas a otro país" tags="" position="848.3333333333333,174.33333333333334">Sales en busca de una [[agencia de viajes]].</tw-passagedata><tw-passagedata pid="10" name="Decides que las croquetas de patata no están tan mal" tags="" position="380,1066">Comes unas cuantas croquetas de patata. Con salsa HP están bastante bien.
 
-Fin.</tw-passagedata><tw-passagedata pid="11" name="Hoja de personaje" tags="footer" position="869,0">&lt;div class=&quot;hojaPersonaje&quot;&gt;
+Fin.</tw-passagedata><tw-passagedata pid="11" name="Hoja de personaje" tags="footer" position="869,0">&lt;hr&gt;
 Pug $clase. Fuerza $fuerza. Carisma $carisma. Agilidad $agilidad. 
 Olfato $olfato.
 (if: $vidaEnemigo &gt; 0)[Aguante del enemigo: $vidaEnemigo]
-&lt;/div&gt;
-(print: &quot;&lt;img src=&#x27;Pug&quot; + $clase + &quot;.gif&#x27; width=&#x27;120px&#x27; height=&#x27;120px&#x27; /&gt;&quot;)</tw-passagedata><tw-passagedata pid="12" name="Defiéndete" tags="" position="684,526">El queso francés intenta chafarte con su olor.
+(if: $numeroFolletos &gt; 0)[Folletos de viaje acumulados: $numeroFolletos]</tw-passagedata><tw-passagedata pid="12" name="Defiéndete" tags="" position="684,526">El queso francés intenta chafarte con su olor.
 
 [[Te apartas]]
 [[Mantienes el aplomo]]
@@ -153,12 +149,14 @@ Percibes un olor muy débil.
 ]</tw-passagedata><tw-passagedata pid="22" name="Lo rastreas" tags="" position="217,1070">Encuentras una bolsa de croquetas de jamón congeladas.
 Féliz, vuelves a casa.
 
-Fin</tw-passagedata><tw-passagedata pid="23" name="agencia de viajes" tags="" position="1265,163">La agencia de viajes está ocupada por una enorme pila de folletos. Afinas tu olfato en busca de una buena oferta y te [[sumerges en la pila]]</tw-passagedata><tw-passagedata pid="24" name="sumerges en la pila" tags="" position="1452,173">En tu búsqueda del folleto adecuado, llegas hasta una muy usada guía de viajes. 
-
-[[Te ataca con ofertas que no quieres]]</tw-passagedata><tw-passagedata pid="25" name="Te ataca con ofertas que no quieres" tags="" position="1654,201">La muy usada guía de viajes te intenta ahogar con ofertas y extras que no quieres.
+Fin</tw-passagedata><tw-passagedata pid="23" name="agencia de viajes" tags="" position="1020,179.66666666666666">La agencia de viajes está ocupada por una enorme pila de folletos. Afinas tu olfato en busca de una buena oferta y te [[sumerges en la pila]]</tw-passagedata><tw-passagedata pid="24" name="sumerges en la pila" tags="" position="1178.6666666666667,184.66666666666666">Estás en un verdadero laberinto de ofertas y paquetes de viaje.
+(set: $numeroFolletos to 0)
+[[Buscas un buen paquete de viaje]]
+[[Quizás un viaje por mar|Ofertas de viajes por mar]]
+[[Siempre has querido volar en un jet-&gt;Ofertas de viajes por aire]]</tw-passagedata><tw-passagedata pid="25" name="Te ataca con ofertas que no quieres" tags="" position="2415.666666666667,279.33333333333337">La muy usada guía de viajes te intenta ahogar con ofertas y extras que no quieres.
 
 [[Empiezas a rasgar las hojas]]
-[[Rechazas todas sus ofertas]]</tw-passagedata><tw-passagedata pid="26" name="Empiezas a rasgar las hojas" tags="" position="1579,351">(if: (random:1,10) &lt; $fuerza - 2)[
+[[Rechazas todas sus ofertas]]</tw-passagedata><tw-passagedata pid="26" name="Empiezas a rasgar las hojas" tags="" position="2340.666666666667,429.33333333333337">(if: (random:1,10) &lt; $fuerza - 2)[
 	Rasgas todas las hojas que te lanza.
 	(set:$vidaEnemiga to $vidaEnemiga - 1)
 ](else:)[
@@ -171,7 +169,7 @@ Fin</tw-passagedata><tw-passagedata pid="23" name="agencia de viajes" tags="" po
 	La muy usada guía de viajes ha caido, [[¡Encuentras el viaje que buscabas!]]
 ](else:)[
 	[[Te ataca con ofertas que no quieres]]
-]</tw-passagedata><tw-passagedata pid="27" name="Rechazas todas sus ofertas" tags="" position="1730,351">(if: (random:1,10) &lt; $carisma - 2)[
+]</tw-passagedata><tw-passagedata pid="27" name="Rechazas todas sus ofertas" tags="" position="2491.666666666667,429.33333333333337">(if: (random:1,10) &lt; $carisma - 2)[
 	Discutes todas las opciones que te propone, explicando que ninguna te conviene.
 	(set:$vidaEnemiga to $vidaEnemiga - 1)
 ](else:)[
@@ -184,15 +182,15 @@ Fin</tw-passagedata><tw-passagedata pid="23" name="agencia de viajes" tags="" po
 	La muy usada guía de viajes ha caido, [[¡Encuentras el viaje que buscabas!]]
 ](else:)[
 	[[Te ataca con ofertas que no quieres]]
-]</tw-passagedata><tw-passagedata pid="28" name="Game Over ante la Guía" tags="" position="1604,555">No encuentras justo lo que buscabas. 
+]</tw-passagedata><tw-passagedata pid="28" name="Game Over ante la Guía" tags="" position="2365.666666666667,633.3333333333334">No encuentras justo lo que buscabas. 
 
-[[Piensas ir de todas maneras]]</tw-passagedata><tw-passagedata pid="29" name="¡Encuentras el viaje que buscabas!" tags="" position="1837,545">Viajas al aeropuerto y coges el [[avión]]</tw-passagedata><tw-passagedata pid="30" name="Piensas ir de todas maneras" tags="" position="1604,705">Vas al aeropuerto y montas en un avión a [[España]]. </tw-passagedata><tw-passagedata pid="31" name="avión" tags="" position="1837,695">Tras un par de horas en el cielo aterrizas en [[Alicante]].</tw-passagedata><tw-passagedata pid="32" name="Alicante" tags="" position="1837,845">Estás en la mítica tierra conocida como Alicante.
+[[Piensas ir de todas maneras]]</tw-passagedata><tw-passagedata pid="29" name="¡Encuentras el viaje que buscabas!" tags="" position="2598.666666666667,623.3333333333334">Viajas al aeropuerto y coges el [[avión]]</tw-passagedata><tw-passagedata pid="30" name="Piensas ir de todas maneras" tags="" position="2365.666666666667,783.3333333333334">Vas al aeropuerto y montas en un avión a [[España]]. </tw-passagedata><tw-passagedata pid="31" name="avión" tags="" position="2598.666666666667,773.3333333333334">Tras un par de horas en el cielo aterrizas en [[Alicante]].</tw-passagedata><tw-passagedata pid="32" name="Alicante" tags="" position="2598.666666666667,923.3333333333334">Estás en la mítica tierra conocida como Alicante.
 
 Tu olfato te guía hasta una casa.
 
-Entras en la [[casa de la señora Matilde]]</tw-passagedata><tw-passagedata pid="33" name="casa de la señora Matilde" tags="" position="1837,995">La señora Matilde te sirve sus [[croquetas de jamón legendarias]].</tw-passagedata><tw-passagedata pid="34" name="croquetas de jamón legendarias" tags="" position="507,1065">Están riquísimas.
+Entras en la [[casa de la señora Matilde]]</tw-passagedata><tw-passagedata pid="33" name="casa de la señora Matilde" tags="" position="2598.666666666667,1073.3333333333333">La señora Matilde te sirve sus [[croquetas de jamón legendarias]].</tw-passagedata><tw-passagedata pid="34" name="croquetas de jamón legendarias" tags="" position="507,1065">Están riquísimas.
 
-Fin.</tw-passagedata><tw-passagedata pid="35" name="España" tags="" position="1604,855">Estás en España. Tu olfato te lleva hasta un [[restaurante]].</tw-passagedata><tw-passagedata pid="36" name="restaurante" tags="" position="652,1070">Comes unas croquetas de bacalao. Están ricas.
+Fin.</tw-passagedata><tw-passagedata pid="35" name="España" tags="" position="2365.666666666667,933.3333333333334">Estás en España. Tu olfato te lleva hasta un [[restaurante]].</tw-passagedata><tw-passagedata pid="36" name="restaurante" tags="" position="652,1070">Comes unas croquetas de bacalao. Están ricas.
 
 Fin.</tw-passagedata><tw-passagedata pid="37" name="Selección de sexo" tags="" position="625,44.166666666666636">(set: $clase to &quot;Basico&quot;, $fuerza to 1, $agilidad to 1, $carisma to 1, $olfato to 10)
 Estás en Inglaterra.
@@ -201,7 +199,51 @@ Estás en Inglaterra.
 (go-to: &quot;Elección de protagonista&quot;)
 [[Elección de protagonista]]</tw-passagedata><tw-passagedata pid="39" name="Eres una pug" tags="" position="436.6666666666667,129.16666666666663">(set: $sexo to &quot;una&quot;)
 (go-to: &quot;Elección de protagonista&quot;)
-[[Elección de protagonista]]</tw-passagedata></tw-storydata>
+[[Elección de protagonista]]</tw-passagedata><tw-passagedata pid="40" name="Muy usada guía de viajes" tags="" position="2203.3333333333335,284.1666666666667">En tu búsqueda del folleto adecuado, llegas hasta una muy usada guía de viajes. 
+
+[[Te ataca con ofertas que no quieres]]</tw-passagedata><tw-passagedata pid="41" name="Buscas un buen paquete de viaje" tags="" position="1300.3333333333335,389.6666666666666">(set: $numeroFolletos to $numeroFolletos + 1)
+Estás en un verdadero laberinto de ofertas y paquetes de viaje.
+
+[[Paquetes de viaje senior]]
+[[Paquetes de viaje junior]]
+[[Paquetes de viaje excelsior]]
+[[Ves un paquete de folletos de cruceros-&gt;Ofertas de viajes por mar]]</tw-passagedata><tw-passagedata pid="42" name="Ofertas de viajes por aire" tags="" position="1598.6666666666667,46.33333333333329">(set: $numeroFolletos to $numeroFolletos + 1)
+Estás en un verdadero laberinto de ofertas y paquetes de viaje.
+
+[[Super viaje en jet-&gt;Paquetes de viaje excelsior]]
+[[Ves un paquete de folletos de cruceros-&gt;Ofertas de viajes por mar]]</tw-passagedata><tw-passagedata pid="43" name="Paquetes de viaje senior" tags="" position="1490.3333333333335,519.6666666666667">(set: $numeroFolletos to $numeroFolletos + 1)
+Estás en un verdadero laberinto de ofertas y paquetes de viaje.
+
+[[Paquetes de viaje senior]]
+[[Paquetes de viaje junior]]
+[[Paquetes de viaje excelsior]]
+[[Viajes senior &quot;cerca del cielo&quot;-&gt;Ofertas de viajes por aire]]</tw-passagedata><tw-passagedata pid="44" name="Paquetes de viaje junior" tags="" position="1777.0000000000002,244.6666666666667">(set: $numeroFolletos to $numeroFolletos + 1)
+Estás en un verdadero laberinto de ofertas y paquetes de viaje.
+
+[[Viaje junior con animales permitidos]]</tw-passagedata><tw-passagedata pid="45" name="Paquetes de viaje excelsior" tags="" position="1415.3333333333333,181.33333333333331">(set: $numeroFolletos to $numeroFolletos + 1)
+Estás en un verdadero laberinto de ofertas y paquetes de viaje.
+
+[[Super viaje en jet-&gt;Ofertas de viajes por aire]]
+[[Ves un paquete de folletos de cruceros-&gt;Ofertas de viajes por mar]]</tw-passagedata><tw-passagedata pid="46" name="Ofertas de viajes por mar" tags="" position="1930.3333333333333,608">(set: $numeroFolletos to $numeroFolletos + 1)
+Estás en un verdadero laberinto de ofertas y paquetes de viaje.
+
+[[Crucero por el Atlántico]]
+[[Paquetes de viaje junior]]
+[[Paquetes de viaje excelsior]]</tw-passagedata><tw-passagedata pid="47" name="Crucero por el Atlántico" tags="" position="1718.6666666666665,616.3333333333333">(set: $numeroFolletos to $numeroFolletos + 1)
+Estás en un verdadero laberinto de ofertas y paquetes de viaje.
+
+[[Mejor ir en avión-&gt;Ofertas de viajes por aire]]
+[[Crucero ultra lujo-&gt;Paquetes de viaje excelsior]]</tw-passagedata><tw-passagedata pid="48" name="Viaje junior con animales permitidos" tags="" position="1862.0000000000002,54.6666666666667">(set: $numeroFolletos to $numeroFolletos + 1)
+Estás en un verdadero laberinto de ofertas y paquetes de viaje.
+
+[[Viaje junior con animales permitidos de precio razonable]]</tw-passagedata><tw-passagedata pid="49" name="Viaje junior con animales permitidos de precio razonable" tags="" position="2043.6666666666667,51.33333333333337">(set: $numeroFolletos to $numeroFolletos + 1)
+Estás en un verdadero laberinto de ofertas y paquetes de viaje.
+
+[[Viaje junior con animales permitidos de precio razonable con buena comida]]</tw-passagedata><tw-passagedata pid="50" name="Viaje junior con animales permitidos de precio razonable con buena comida" tags="" position="1980.3333333333335,186.33333333333337">(set: $numeroFolletos to $numeroFolletos + 1)
+Estás en un verdadero laberinto de ofertas y paquetes de viaje.
+
+[[No, mejor en barco-&gt;Ofertas de viajes por mar]]
+[[Mira, este viaje parece aceptable-&gt;Muy usada guía de viajes]]</tw-passagedata></tw-storydata>
 
 <script title="Twine engine code" data-main="harlowe">"use strict";function _defineProperty(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}function _toConsumableArray(e){if(Array.isArray(e)){for(var t=0,n=Array(e.length);t<e.length;t++)n[t]=e[t];return n}return Array.from(e)}var _slicedToArray=function(){function e(e,t){var n=[],r=!0,i=!1,o=void 0;try{for(var a,s=e[Symbol.iterator]();!(r=(a=s.next()).done)&&(n.push(a.value),!t||n.length!==t);r=!0);}catch(e){i=!0,o=e}finally{try{!r&&s.return&&s.return()}finally{if(i)throw o}}return n}return function(t,n){if(Array.isArray(t))return t;if(Symbol.iterator in Object(t))return e(t,n);throw new TypeError("Invalid attempt to destructure non-iterable instance")}}(),_typeof="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e};!function(){/**
  * @license almond 0.3.3 Copyright jQuery Foundation and other contributors.
