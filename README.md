@@ -21,3 +21,5 @@ Sistema de combate:
 Fuerza, Agilidad, Carisma, Olfato
 
 Desarrollando la historia en Twine.
+
+Dibujar los gráficos en Piskel.
