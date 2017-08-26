@@ -46,7 +46,9 @@ tw-include[type="footer"] {
 
 
 
+
 </style><script role="script" id="twine-user-script" type="text/twine-javascript">
+
 
 
 
@@ -119,13 +121,13 @@ Te preguntas cómo llegar hasta una croqueta de jamón.
 ]}</tw-passagedata><tw-passagedata pid="8" name="Vas a una tienda" tags="imagen" position="466,424">Vas hasta una tienda de productos de importación.
 (print: &quot;&lt;img src=&#x27;TiendaImportacion.gif&#x27; width=&#x27;300px&#x27; height=&#x27;300px&#x27; /&gt;&quot;)
 [[Entra en la tienda-&gt;Queso Francés]]</tw-passagedata><tw-passagedata pid="9" name="Viajas a otro país" tags="imagen" position="848,174">Sales en busca de una [[agencia de viajes]].
-(print: &quot;&lt;img src=&#x27;AgenciaViajes.gif&#x27; width=&#x27;300px&#x27; height=&#x27;300px&#x27; /&gt;&quot;)</tw-passagedata><tw-passagedata pid="10" name="Decides que las croquetas de patata no están tan mal" tags="final imagen" position="381,1066">Comes unas cuantas croquetas de patata. Con salsa HP están bastante bien.
+(print: &quot;&lt;img src=&#x27;AgenciaViajes.gif&#x27; width=&#x27;300px&#x27; height=&#x27;300px&#x27; /&gt;&quot;)</tw-passagedata><tw-passagedata pid="10" name="Decides que las croquetas de patata no están tan mal" tags="final imagen" position="381,1066">Comes unas cuantas croquetas de patata. Con salsa están bastante bien.
 (print: &quot;&lt;img src=&#x27;CroquetasPatata.gif&#x27; width=&#x27;300px&#x27; height=&#x27;300px&#x27; /&gt;&quot;)
 (if: not ($croquetas contains  &quot;Croquetas de patata&quot;))[
-	¡Subes un nivel!
+	¡Subes un nivel!{
 	(set: $nivel to $nivel + 1)
 	(set: $croquetas to $croquetas + (a: &quot;Croquetas de patata&quot;))
-]
+}]
 =&gt;&lt;=
 (if: $nivel &lt; 10)[¿Fin?
 [[Volver al principio-&gt;Reset]]
