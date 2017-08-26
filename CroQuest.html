@@ -272,10 +272,10 @@ Game Over
 Feliz, vuelves a casa.
 (print: &quot;&lt;img src=&#x27;CroquetasCongeladas.gif&#x27; width=&#x27;300px&#x27; height=&#x27;300px&#x27; /&gt;&quot;)
 (if: not ($croquetas contains  &quot;Croquetas de jamón congeladas&quot;))[
-	¡Subes un nivel!
+	¡Subes un nivel!{
 	(set: $nivel to $nivel + 1)
 	(set: $croquetas to $croquetas + (a: &quot;Croquetas de jamón congeladas&quot;))
-]
+}]
 =&gt;&lt;=
 (if: $nivel &lt; 10)[¿Fin?
 [[Volver al principio-&gt;Reset]]
@@ -355,10 +355,10 @@ Entras en la [[casa de la señora Matilde]]</tw-passagedata><tw-passagedata pid=
 ]}
 (print: &quot;&lt;img src=&#x27;Legendario.gif&#x27; width=&#x27;300px&#x27; height=&#x27;300px&#x27; /&gt;&quot;)
 (if: not ($croquetas contains  &quot;Croquetas de jamón legendarias&quot;))[
-	¡Subes cinco niveles!
+	¡Subes cinco niveles!{
 	(set: $nivel to $nivel + 5)
 	(set: $croquetas to $croquetas + (a: &quot;Croquetas de jamón legendarias&quot;))
-]
+}]
 =&gt;&lt;=
 (if: $nivel &lt; 10)[¿Fin?
 [[Volver al principio-&gt;Reset]]
@@ -369,10 +369,10 @@ Entras en la [[casa de la señora Matilde]]</tw-passagedata><tw-passagedata pid=
 Tu olfato te lleva hasta un [[restaurante]].</tw-passagedata><tw-passagedata pid="36" name="restaurante" tags="final imagen" position="652,1070">Comes unas croquetas de bacalao. Están ricas.
 (print: &quot;&lt;img src=&#x27;CroquetasRestaurante.gif&#x27; width=&#x27;300px&#x27; height=&#x27;300px&#x27; /&gt;&quot;)
 (if: not ($croquetas contains  &quot;Croquetas de bacalao&quot;))[
-	¡Subes dos niveles de golpe!
+	¡Subes dos niveles de golpe!{
 	(set: $nivel to $nivel + 2)
 	(set: $croquetas to $croquetas + (a: &quot;Croquetas de bacalao&quot;))
-]
+}]
   =&gt;&lt;=
 (if: $nivel &lt; 10)[¿Fin?
 [[Volver al principio-&gt;Reset]]
