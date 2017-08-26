@@ -11,7 +11,10 @@
 
 <tw-story></tw-story>
 
-<tw-storydata name="CroQuest" startnode="37" creator="Twine" creator-version="2.1.3" ifid="A5552E28-7EDE-40AF-AA53-2BEC06554AED" format="Harlowe" format-version="2.0.1" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">tw-include[type="footer"] {
+<tw-storydata name="CroQuest" startnode="60" creator="Twine" creator-version="2.1.3" ifid="A5552E28-7EDE-40AF-AA53-2BEC06554AED" format="Harlowe" format-version="2.0.1" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">tw-passage[tags="no-footer"] tw-include[type="footer"] {
+  	display: none;
+}
+tw-include[type="footer"] {
     position: fixed;
     right: 5%;
     top: 72px;
@@ -99,7 +102,8 @@ Te preguntas cómo llegar hasta una croqueta de jamón.
 [[Volver al principio-&gt;Reset]]
 ](else:)[
 	[[Has completado tu CroQuest]]
-]</tw-passagedata><tw-passagedata pid="11" name="Hoja de personaje" tags="footer" position="1190.6666666666665,0">Pug $clase de nivel $nivel. 
+]</tw-passagedata><tw-passagedata pid="11" name="Hoja de personaje" tags="footer" position="1190.6666666666665,0">(if: $iniciado)[
+Pug $clase de nivel $nivel. 
 &lt;hr&gt;Fuerza $fuerza. 
 Carisma $carisma. 
 Agilidad $agilidad.
@@ -131,9 +135,9 @@ $habilidadEspecial.]
 	Folletos de viaje acumulados: (colour: $colorFolletos)[$numeroFolletos]
 ]}(if: length of $croquetas &gt; 0)[{
 &lt;hr&gt;Croquetas probadas:}
-(print: ...$croquetas)
+(print: $croquetas.join(&quot;\n&quot;))
 ]
-</tw-passagedata><tw-passagedata pid="12" name="Defiéndete" tags="imagen" position="717,554">El queso francés intenta chafarte con su olor.
+]</tw-passagedata><tw-passagedata pid="12" name="Defiéndete" tags="imagen" position="717,554">El queso francés intenta chafarte con su olor.
 (print: &quot;&lt;img src=&#x27;QuesoFrances.gif&#x27; width=&#x27;300px&#x27; height=&#x27;300px&#x27; /&gt;&quot;)
 [[Te apartas]]
 [[Mantienes el aplomo]]
@@ -311,7 +315,8 @@ Viajas al aeropuerto y coges el [[avión]].
 &lt;img src=&quot;Alicante.gif&quot; width=&quot;300px&quot; height=&quot;300px&quot; /&gt;
 Tu olfato te guía hasta una casa.
 
-Entras en la [[casa de la señora Matilde]]</tw-passagedata><tw-passagedata pid="33" name="casa de la señora Matilde" tags="" position="3466.3333333333335,1106.3333333333333">La señora Matilde te sirve sus [[croquetas de jamón legendarias]].</tw-passagedata><tw-passagedata pid="34" name="croquetas de jamón legendarias" tags="final" position="507,1065">Están riquísimas.
+Entras en la [[casa de la señora Matilde]]</tw-passagedata><tw-passagedata pid="33" name="casa de la señora Matilde" tags="" position="3466.3333333333335,1106.3333333333333">La señora Matilde te sirve sus [[croquetas de jamón legendarias]].
+&lt;img src=&quot;CasaMatilde.gif&quot; width=&quot;300px&quot; height=&quot;300px&quot; /&gt;</tw-passagedata><tw-passagedata pid="34" name="croquetas de jamón legendarias" tags="final" position="507,1065">Están riquísimas.
 {(live: 0.5s)[
     (either: &quot;Ñam ñam ñam&quot;, &quot;Glup ñam greeg&quot;, &quot;Ñam ñam&quot;, &quot;Ñam glup ñam&quot;)
 ]}
@@ -328,8 +333,10 @@ Entras en la [[casa de la señora Matilde]]</tw-passagedata><tw-passagedata pid=
 [[Volver al principio-&gt;Reset]]
 ](else:)[
 	[[Has completado tu CroQuest]]
-]</tw-passagedata><tw-passagedata pid="35" name="España" tags="" position="3235,966.3333333333334">Estás en España. Tu olfato te lleva hasta un [[restaurante]].</tw-passagedata><tw-passagedata pid="36" name="restaurante" tags="final imagen" position="652,1070">Comes unas croquetas de bacalao. Están ricas.
+]</tw-passagedata><tw-passagedata pid="35" name="España" tags="imagen" position="3235,966.3333333333334">Estás en España. 
 (print: &quot;&lt;img src=&#x27;EspanyaRestaurante.gif&#x27; width=&#x27;300px&#x27; height=&#x27;300px&#x27; /&gt;&quot;)
+Tu olfato te lleva hasta un [[restaurante]].</tw-passagedata><tw-passagedata pid="36" name="restaurante" tags="final imagen" position="652,1070">Comes unas croquetas de bacalao. Están ricas.
+(print: &quot;&lt;img src=&#x27;CroquetasRestaurante.gif&#x27; width=&#x27;300px&#x27; height=&#x27;300px&#x27; /&gt;&quot;)
 
 (if: not ($croquetas contains  &quot;Croquetas de bacalao&quot;))[
 	¡Subes dos niveles de golpe!
@@ -348,7 +355,7 @@ Entras en la [[casa de la señora Matilde]]</tw-passagedata><tw-passagedata pid=
 &lt;img src=&quot;PugBasico.gif&quot; width=&quot;300px&quot; height=&quot;300px&quot; /&gt;
 [[Eres un pug]]
 [[Eres una pug]]
-(set: $clase to &quot;Basico&quot;, $fuerza to 1, $agilidad to 1, $carisma to 1, $olfato to 10, $nivel to 1, $croquetas to (a:))</tw-passagedata><tw-passagedata pid="38" name="Eres un pug" tags="Redireccion" position="390.6666666666667,0.33333333333333304">(set: $sexo to &quot;un&quot;)
+(set: $iniciado to true, $clase to &quot;Basico&quot;, $fuerza to 1, $agilidad to 1, $carisma to 1, $olfato to 10, $nivel to 1, $croquetas to (a:))</tw-passagedata><tw-passagedata pid="38" name="Eres un pug" tags="Redireccion" position="390.6666666666667,0.33333333333333304">(set: $sexo to &quot;un&quot;)
 (go-to: &quot;Elección de protagonista&quot;)
 [[Elección de protagonista]]</tw-passagedata><tw-passagedata pid="39" name="Eres una pug" tags="Redireccion" position="396,125.66666666666667">(set: $sexo to &quot;una&quot;)
 (go-to: &quot;Elección de protagonista&quot;)
@@ -586,7 +593,11 @@ Estás en un verdadero laberinto de ofertas y paquetes de viaje.
 
 (print: &quot;&lt;img class=&#x27;floatLeft&#x27; src=&#x27;CroquetasCongeladas.gif&#x27; width=&#x27;300px&#x27; height=&#x27;300px&#x27; /&gt;&quot;)(print: &quot;&lt;img class=&#x27;floatLeft&#x27; src=&#x27;CroquetasPatata.gif&#x27; width=&#x27;300px&#x27; height=&#x27;300px&#x27; /&gt;&quot;)(print: &quot;&lt;img class=&#x27;floatLeft&#x27; src=&#x27;Pug&quot; + $clase + &quot;.gif&#x27; width=&#x27;300px&#x27; height=&#x27;300px&#x27; /&gt;&quot;)(print: &quot;&lt;img class=&#x27;floatLeft&#x27; src=&#x27;EspanyaRestaurante.gif&#x27; width=&#x27;300px&#x27; height=&#x27;300px&#x27; /&gt;&quot;)
   =&gt;&lt;=
-FIN</tw-passagedata></tw-storydata>
+FIN</tw-passagedata><tw-passagedata pid="60" name="CroQuest" tags="no-footer" position="791.6666666666666,37.49999999999992">=&gt;&lt;=
+&lt;img src=&quot;titulo.png&quot; /&gt;
+
+[[Empieza tu búsqueda-&gt;Selección de sexo]]
+(set: $iniciado to false)</tw-passagedata></tw-storydata>
 
 <script title="Twine engine code" data-main="harlowe">"use strict";function _defineProperty(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}function _toConsumableArray(e){if(Array.isArray(e)){for(var t=0,n=Array(e.length);t<e.length;t++)n[t]=e[t];return n}return Array.from(e)}var _slicedToArray=function(){function e(e,t){var n=[],r=!0,i=!1,o=void 0;try{for(var a,s=e[Symbol.iterator]();!(r=(a=s.next()).done)&&(n.push(a.value),!t||n.length!==t);r=!0);}catch(e){i=!0,o=e}finally{try{!r&&s.return&&s.return()}finally{if(i)throw o}}return n}return function(t,n){if(Array.isArray(t))return t;if(Symbol.iterator in Object(t))return e(t,n);throw new TypeError("Invalid attempt to destructure non-iterable instance")}}(),_typeof="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e};!function(){/**
  * @license almond 0.3.3 Copyright jQuery Foundation and other contributors.
