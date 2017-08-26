@@ -11,7 +11,25 @@
 
 <tw-story></tw-story>
 
-<tw-storydata name="CroQuest" startnode="60" creator="Twine" creator-version="2.1.3" ifid="A5552E28-7EDE-40AF-AA53-2BEC06554AED" format="Harlowe" format-version="2.0.1" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">tw-passage[tags="no-footer"] tw-include[type="footer"] {
+<tw-storydata name="CroQuest" startnode="60" creator="Twine" creator-version="2.1.3" ifid="A5552E28-7EDE-40AF-AA53-2BEC06554AED" format="Harlowe" format-version="2.0.1" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">tw-passage {
+ 	right: 25%; 
+}
+img.floatLeft {
+  float: left;
+}
+tw-story[tags="no-footer"] {
+  padding-right: 5%;
+    padding-left: 5%;
+}
+tw-passage[tags="no-footer"] {
+  width: 100%;
+  right: 0%;
+}
+tw-passage[tags="no-footer"] tw-align {
+ width: 90%;
+  max-width: 90%!important;
+}
+tw-passage[tags="no-footer"] tw-include[type="footer"] {
   	display: none;
 }
 tw-include[type="footer"] {
@@ -23,12 +41,7 @@ tw-include[type="footer"] {
     padding: 5px;
     border-radius: 10px;
 }
-tw-passage {
- 	right: 25%; 
-}
-img.floatLeft {
-  float: left;
-}
+
 
 
 
