@@ -85,9 +85,21 @@ Te preguntas cómo llegar hasta una croqueta de jamón.
 [[Decides que las croquetas de patata no están tan mal]]</tw-passagedata><tw-passagedata pid="8" name="Vas a una tienda" tags="imagen" position="466,424">Vas hasta una tienda de productos de importación.
 (print: &quot;&lt;img src=&#x27;TiendaImportacion.gif&#x27; width=&#x27;300px&#x27; height=&#x27;300px&#x27; /&gt;&quot;)
 [[Entra en la tienda-&gt;Queso Francés]]</tw-passagedata><tw-passagedata pid="9" name="Viajas a otro país" tags="imagen" position="848,174">Sales en busca de una [[agencia de viajes]].
-(print: &quot;&lt;img src=&#x27;AgenciaViajes.gif&#x27; width=&#x27;300px&#x27; height=&#x27;300px&#x27; /&gt;&quot;)</tw-passagedata><tw-passagedata pid="10" name="Decides que las croquetas de patata no están tan mal" tags="final" position="380,1066">Comes unas cuantas croquetas de patata. Con salsa HP están bastante bien.
+(print: &quot;&lt;img src=&#x27;AgenciaViajes.gif&#x27; width=&#x27;300px&#x27; height=&#x27;300px&#x27; /&gt;&quot;)</tw-passagedata><tw-passagedata pid="10" name="Decides que las croquetas de patata no están tan mal" tags="final imagen" position="381.6666666666667,1066">Comes unas cuantas croquetas de patata. Con salsa HP están bastante bien.
+(print: &quot;&lt;img src=&#x27;CroquetasPatata.gif&#x27; width=&#x27;300px&#x27; height=&#x27;300px&#x27; /&gt;&quot;)
+(if: not ($croquetas contains  &quot;Croquetas de patata&quot;))[
+	¡Subes un nivel!
+	(set: $nivel to $nivel + 1)
+	(set: $croquetas to $croquetas + (a: &quot;Croquetas de patata&quot;))
+]
+  =&gt;&lt;=
+(if: $nivel &lt; 10)[
+¿Fin?
 
-Fin.</tw-passagedata><tw-passagedata pid="11" name="Hoja de personaje" tags="footer" position="869,0">Pug $clase de nivel $nivel. 
+[[Volver al principio-&gt;Reset]]
+](else:)[
+	[[Has completado tu CroQuest]]
+]</tw-passagedata><tw-passagedata pid="11" name="Hoja de personaje" tags="footer" position="1190.6666666666665,0">Pug $clase de nivel $nivel. 
 &lt;hr&gt;Fuerza $fuerza. 
 Carisma $carisma. 
 Agilidad $agilidad.
@@ -117,72 +129,81 @@ $habilidadEspecial.]
 		(set: $colorFolletos to red)
 	]
 	Folletos de viaje acumulados: (colour: $colorFolletos)[$numeroFolletos]
-]}</tw-passagedata><tw-passagedata pid="12" name="Defiéndete" tags="imagen" position="717,554">El queso francés intenta chafarte con su olor.
+]}(if: length of $croquetas &gt; 0)[{
+&lt;hr&gt;Croquetas probadas:}
+(print: ...$croquetas)
+]
+</tw-passagedata><tw-passagedata pid="12" name="Defiéndete" tags="imagen" position="717,554">El queso francés intenta chafarte con su olor.
 (print: &quot;&lt;img src=&#x27;QuesoFrances.gif&#x27; width=&#x27;300px&#x27; height=&#x27;300px&#x27; /&gt;&quot;)
 [[Te apartas]]
 [[Mantienes el aplomo]]
-[[Aprietas los dientes]]</tw-passagedata><tw-passagedata pid="13" name="Te apartas" tags="imagen" position="902,576">(if: (random:1,10) &lt; $agilidad - 4)[
+[[Aprietas los dientes]]</tw-passagedata><tw-passagedata pid="13" name="Te apartas" tags="imagen" position="902,576">{(if: (random:1,10) &lt; $agilidad - 4)[
 	Asombrosamente esquivas el olor.
 ](else:)[
 	El tufo te destroza el olfato. -1 Olfato.(set:$olfato to $olfato - 1)
-]
+]}
 (print: &quot;&lt;img src=&#x27;QuesoFrances.gif&#x27; width=&#x27;300px&#x27; height=&#x27;300px&#x27; /&gt;&quot;)
-(if: $olfato &lt; 1)[
+{(if: $olfato &lt; 1)[
 	Tu olfato ha desaparecido.[[Game Over]]
 ](else-if: $vidaEnemigo &lt; 1)[
 	El queso ha caido, [[¡Victoria!]]
 ](else:)[
 	[[Ataca]]
-]</tw-passagedata><tw-passagedata pid="14" name="Mantienes el aplomo" tags="imagen" position="892,735">(if: (random:1,10) &lt; $carisma - 3)[
+]}</tw-passagedata><tw-passagedata pid="14" name="Mantienes el aplomo" tags="imagen" position="892,735">{(if: (random:1,10) &lt; $carisma - 3)[
 	Aguantas el tipo. Casi parece que te guste el olor.
 	(set:$vidaEnemigo to $vidaEnemigo - 1)
 ](else:)[
 	El tufo te destroza el olfato. -1 Olfato.
 	(set:$olfato to $olfato - 1)
-]
+]}
 (print: &quot;&lt;img src=&#x27;QuesoFrances.gif&#x27; width=&#x27;300px&#x27; height=&#x27;300px&#x27; /&gt;&quot;)
-(if: $olfato &lt; 1)[
+{(if: $olfato &lt; 1)[
 	Tu olfato ha desaparecido.[[Game Over]]
 ](else-if: $vidaEnemigo &lt; 1)[
 	El queso ha caido, [[¡Victoria!]]
 ](else:)[
 	[[Ataca]]
-]</tw-passagedata><tw-passagedata pid="15" name="Aprietas los dientes" tags="imagen" position="904,433">(if: (random:1,10) &lt; $fuerza - 2)[
+]}</tw-passagedata><tw-passagedata pid="15" name="Aprietas los dientes" tags="imagen" position="905.6666666666666,433">{(if: (random:1,10) &lt; $fuerza - 2)[
 	Aguantas el pestazo sin problemas.
 ](else:)[
 	El tufo te destroza el olfato. -1 Olfato.(set:$olfato to $olfato - 1)
-]
+]}
 (print: &quot;&lt;img src=&#x27;QuesoFrances.gif&#x27; width=&#x27;300px&#x27; height=&#x27;300px&#x27; /&gt;&quot;)
-(if: $olfato &lt; 1)[
+{(if: $olfato &lt; 1)[
 	Tu olfato ha desaparecido.[[Game Over]]
 ](else-if: $vidaEnemigo &lt; 1)[
 	El queso ha caido, [[¡Victoria!]]
 ](else:)[
 	[[Ataca]]
-]</tw-passagedata><tw-passagedata pid="16" name="Game Over" tags="final" position="40,1066">Sin tu olfato, la búsqueda de croquetas ha perdido su razón de ser.
+]}</tw-passagedata><tw-passagedata pid="16" name="Game Over" tags="final imagen" position="40,1066">Sin tu olfato, la búsqueda de croquetas ha perdido su razón de ser.
+(print: &quot;&lt;img src=&#x27;GameOver.gif&#x27; width=&#x27;300px&#x27; height=&#x27;300px&#x27; /&gt;&quot;)
+=&gt;&lt;=
+Game Over
 
-(click:&quot;Game Over&quot;)[(reload:)]</tw-passagedata><tw-passagedata pid="17" name="¡Victoria!" tags="" position="694,891">(set: $vidaEnemigo to 0)
-Percibes un olor muy débil.
-[[Lo rastreas]]</tw-passagedata><tw-passagedata pid="18" name="Ataca" tags="imagen" position="1010,906">El queso se detiene unos segundos.
+[Volver a empezar]
+(click:&quot;Volver a empezar&quot;)[(reload:)]</tw-passagedata><tw-passagedata pid="17" name="¡Victoria!" tags="imagen" position="694,891">Percibes un olor muy débil.
+(print: &quot;&lt;img src=&#x27;OlorDebil.gif&#x27; width=&#x27;300px&#x27; height=&#x27;300px&#x27; /&gt;&quot;)
+[[Lo rastreas]]
+(set: $vidaEnemigo to 0)</tw-passagedata><tw-passagedata pid="18" name="Ataca" tags="imagen" position="1010,906">El queso se detiene unos segundos.
 (print: &quot;&lt;img src=&#x27;QuesoFrances.gif&#x27; width=&#x27;300px&#x27; height=&#x27;300px&#x27; /&gt;&quot;)
 [[Aprovechas para chafarlo con unas latas]]
 [[Intentas convencerle para detener esta locura]]
-[[Haces un amago para sobrepasarle y avanzar en la tienda]]</tw-passagedata><tw-passagedata pid="19" name="Aprovechas para chafarlo con unas latas" tags="imagen" position="1229,1075">(set: _ataque to (random:1,10))
+[[Haces un amago para sobrepasarle y avanzar en la tienda]]</tw-passagedata><tw-passagedata pid="19" name="Aprovechas para chafarlo con unas latas" tags="imagen" position="1229,1075">{(set: _ataque to (random:1,10))
 
 (if: _ataque &lt; $fuerza - 1)[
 	Chafas al queso con toda tu fuerza.
 	(set:$vidaEnemigo to $vidaEnemigo - ($fuerza - 1 - $ataque))
 ](else:)[
 	El queso esquiva la lata. El tufo te destroza el olfato. -1 Olfato.		(set:$olfato to $olfato - 1)
-]
+]}
 (print: &quot;&lt;img src=&#x27;QuesoFrances.gif&#x27; width=&#x27;300px&#x27; height=&#x27;300px&#x27; /&gt;&quot;)
-(if: $olfato &lt; 1)[
+{(if: $olfato &lt; 1)[
 	Tu olfato ha desaparecido.[[Game Over]]
 ](else-if: $vidaEnemigo &lt; 1)[
 	El queso ha caido, [[¡Victoria!]]
 ](else:)[
 	[[Defiéndete]]
-]</tw-passagedata><tw-passagedata pid="20" name="Intentas convencerle para detener esta locura" tags="imagen" position="1244,916">(set: _ataque to (random:1,10))
+]}</tw-passagedata><tw-passagedata pid="20" name="Intentas convencerle para detener esta locura" tags="imagen" position="1244,916">{(set: _ataque to (random:1,10))
 
 (if: _ataque &lt; $carisma - 3)[
 	El queso no ve agujeros en tus argumentos.
@@ -190,31 +211,44 @@ Percibes un olor muy débil.
 ](else:)[
 	El queso no acepta tus premisas. El tufo te destroza el olfato. -1 Olfato.
 	(set:$olfato to $olfato - 1)
-]
+]}
 (print: &quot;&lt;img src=&#x27;QuesoFrances.gif&#x27; width=&#x27;300px&#x27; height=&#x27;300px&#x27; /&gt;&quot;)
-(if: $olfato &lt; 1)[
+{(if: $olfato &lt; 1)[
 	Tu olfato ha desaparecido.[[Game Over]]
 ](else-if: $vidaEnemigo &lt; 1)[
 	El queso ha caido, [[¡Victoria!]]
 ](else:)[
 	[[Defiéndete]]
-]</tw-passagedata><tw-passagedata pid="21" name="Haces un amago para sobrepasarle y avanzar en la tienda" tags="imagen" position="1245,776">(if: (random:1,10) &lt; $agilidad - $vidaEnemigo)[
+]}</tw-passagedata><tw-passagedata pid="21" name="Haces un amago para sobrepasarle y avanzar en la tienda" tags="imagen" position="1246.6666666666667,774.3333333333334">{(if: (random:1,10) &lt; $agilidad - $vidaEnemigo)[
 	Consigues dejarle atrás.(set:$vidaEnemigo to 0)
 ](else:)[
 	No consigues pasar. El tufo te destroza el olfato. -1 Olfato.
 	(set:$olfato to $olfato - 1)
-]
+]}
 (print: &quot;&lt;img src=&#x27;QuesoFrances.gif&#x27; width=&#x27;300px&#x27; height=&#x27;300px&#x27; /&gt;&quot;)
-(if: $olfato &lt; 1)[
+{(if: $olfato &lt; 1)[
 	Tu olfato ha desaparecido.[[Game Over]]
 ](else-if: $vidaEnemigo &lt; 1)[
 	El queso ha caido, [[¡Victoria!]]
 ](else:)[
 	[[Defiéndete]]
-]</tw-passagedata><tw-passagedata pid="22" name="Lo rastreas" tags="imagen final" position="217,1070">Encuentras una bolsa de croquetas de jamón congeladas.
+]}</tw-passagedata><tw-passagedata pid="22" name="Lo rastreas" tags="imagen final" position="217,1070">Encuentras una bolsa de croquetas de jamón congeladas.
 Feliz, vuelves a casa.
 (print: &quot;&lt;img src=&#x27;CroquetasCongeladas.gif&#x27; width=&#x27;300px&#x27; height=&#x27;300px&#x27; /&gt;&quot;)
-Fin</tw-passagedata><tw-passagedata pid="23" name="agencia de viajes" tags="imagen" position="1020,179">La agencia de viajes está ocupada por una enorme pila de folletos. Afinas tu olfato en busca de una buena oferta y te [[sumerges en la pila]]
+
+(if: not ($croquetas contains  &quot;Croquetas de jamón congeladas&quot;))[
+	¡Subes un nivel!
+	(set: $nivel to $nivel + 1)
+	(set: $croquetas to $croquetas + (a: &quot;Croquetas de jamón congeladas&quot;))
+]
+  =&gt;&lt;=
+(if: $nivel &lt; 10)[
+¿Fin?
+
+[[Volver al principio-&gt;Reset]]
+](else:)[
+	[[Has completado tu CroQuest]]
+]</tw-passagedata><tw-passagedata pid="23" name="agencia de viajes" tags="imagen" position="1020,179">La agencia de viajes está ocupada por una enorme pila de folletos. Afinas tu olfato en busca de una buena oferta y te [[sumerges en la pila]]
 (print: &quot;&lt;img src=&#x27;AgenciaViajes.gif&#x27; width=&#x27;300px&#x27; height=&#x27;300px&#x27; /&gt;&quot;)</tw-passagedata><tw-passagedata pid="24" name="sumerges en la pila" tags="imagen habilidad-especial" position="1180,184">Estás en un verdadero laberinto de ofertas y paquetes de viaje.
 (set: $numeroFolletos to 0)
 (print: &quot;&lt;img src=&#x27;LaberintoFolletos.gif&#x27; width=&#x27;300px&#x27; height=&#x27;300px&#x27; /&gt;&quot;)
@@ -234,63 +268,94 @@ Fin</tw-passagedata><tw-passagedata pid="23" name="agencia de viajes" tags="imag
 	  Estás cansándote de esta agencia. 
 	  Quizás deberías [[buscar una tienda-&gt;Vas a una tienda]] aquí.
   ]
-]</tw-passagedata><tw-passagedata pid="25" name="Te ataca con ofertas que no quieres" tags="imagen habilidad-especial" position="2417,279">La muy usada guía de viajes te intenta ahogar con ofertas y extras que no quieres.
+]</tw-passagedata><tw-passagedata pid="25" name="Te ataca con ofertas que no quieres" tags="imagen habilidad-especial" position="3285.3333333333335,312.3333333333333">La muy usada guía de viajes te intenta ahogar con ofertas y extras que no quieres.
 (print: &quot;&lt;img src=&#x27;GuiaViajes.gif&#x27; width=&#x27;300px&#x27; height=&#x27;300px&#x27; /&gt;&quot;)
 [[Empiezas a rasgar las hojas]]
 [[Rechazas todas sus ofertas]]
 (if: $habilidadEspecial is &quot;Ladridos abucheantes&quot;)[
 	[[Usas tus Ladridos Abucheantes]]
-]</tw-passagedata><tw-passagedata pid="26" name="Empiezas a rasgar las hojas" tags="imagen" position="2340,429">(if: (random:1,10) &lt; $fuerza - 2)[
+]</tw-passagedata><tw-passagedata pid="26" name="Empiezas a rasgar las hojas" tags="imagen" position="3208.3333333333335,462.3333333333333">{(if: (random:1,10) &lt; $fuerza - 2)[
 	Rasgas todas las hojas que te lanza.
-	(set:$vidaEnemiga to $vidaEnemiga - 1)
+	(set:$vidaEnemigo to $vidaEnemigo - 1)
 ](else:)[
 	Hay demasiadas ofertas. Están confundiendo tus sentidos. -1 Olfato.(set:$olfato to $olfato - 1)
-]
+]}
 (print: &quot;&lt;img src=&#x27;GuiaViajes.gif&#x27; width=&#x27;300px&#x27; height=&#x27;300px&#x27; /&gt;&quot;)
-(if: $olfato &lt; 1)[
+{(if: $olfato &lt; 1)[
 	Tu olfato ha desaparecido. No puedes encontrar un viaje que te convenza.[[Game Over-&gt;Game Over ante la Guía]]
 ](else-if: $vidaEnemigo &lt; 1)[
 	La muy usada guía de viajes ha caido, [[¡Encuentras el viaje que buscabas!]]
 ](else:)[
 	[[Te ataca con ofertas que no quieres]]
-]</tw-passagedata><tw-passagedata pid="27" name="Rechazas todas sus ofertas" tags="imagen" position="2491,429">(if: (random:1,10) &lt; $carisma - 2)[
+]}</tw-passagedata><tw-passagedata pid="27" name="Rechazas todas sus ofertas" tags="imagen" position="3361,462.3333333333333">{(if: (random:1,10) &lt; $carisma - 2)[
 	Discutes todas las opciones que te propone, explicando que ninguna te conviene.
-	(set:$vidaEnemiga to $vidaEnemiga - 1)
+	(set:$vidaEnemigo to $vidaEnemigo - 1)
 ](else:)[
 	Hay demasiadas ofertas. Algunas suenan bien, aunque no son justo lo que querías. -1 Olfato.(set:$olfato to $olfato - 1)
-]
+]}
 (print: &quot;&lt;img src=&#x27;GuiaViajes.gif&#x27; width=&#x27;300px&#x27; height=&#x27;300px&#x27; /&gt;&quot;)
-(if: $olfato &lt; 1)[
+{(if: $olfato &lt; 1)[
 	Tu olfato ha desaparecido. No puedes encontrar un viaje que te convenza.[[Game Over-&gt;Game Over ante la Guía]]
 ](else-if: $vidaEnemigo &lt; 1)[
 	La muy usada guía de viajes ha caido, [[¡Encuentras el viaje que buscabas!]]
 ](else:)[
 	[[Te ataca con ofertas que no quieres]]
-]</tw-passagedata><tw-passagedata pid="28" name="Game Over ante la Guía" tags="" position="2365,633">No encuentras justo lo que buscabas. 
-(print: &quot;&lt;img src=&#x27;GuiaViajes.gif&#x27; width=&#x27;300px&#x27; height=&#x27;300px&#x27; /&gt;&quot;)
-[[Piensas ir de todas maneras]]</tw-passagedata><tw-passagedata pid="29" name="¡Encuentras el viaje que buscabas!" tags="imagen" position="2598,623">Viajas al aeropuerto y coges el [[avión]].
-&lt;img src=&quot;PugAvion.gif&quot; width=&quot;300px&quot; height=&quot;300px&quot; /&gt;</tw-passagedata><tw-passagedata pid="30" name="Piensas ir de todas maneras" tags="imagen" position="2365,783">Vas al aeropuerto y montas en un avión a [[España]]. 
-&lt;img src=&quot;PugAvion.gif&quot; width=&quot;300px&quot; height=&quot;300px&quot; /&gt;</tw-passagedata><tw-passagedata pid="31" name="avión" tags="" position="2598,773">Tras un par de horas en el cielo aterrizas en [[Alicante]].
-&lt;img src=&quot;PugAvion.gif&quot; width=&quot;300px&quot; height=&quot;300px&quot; /&gt;</tw-passagedata><tw-passagedata pid="32" name="Alicante" tags="" position="2598,923">Estás en la mítica tierra conocida como Alicante.
+]}</tw-passagedata><tw-passagedata pid="28" name="Game Over ante la Guía" tags="" position="3233.3333333333335,666.3333333333334">No encuentras justo lo que buscabas. 
+{(print: &quot;&lt;img src=&#x27;GuiaViajes.gif&#x27; width=&#x27;300px&#x27; height=&#x27;300px&#x27; /&gt;&quot;)
+(set: $vidaEnemigo to 0)}
+[[Piensas ir de todas maneras]]</tw-passagedata><tw-passagedata pid="29" name="¡Encuentras el viaje que buscabas!" tags="imagen" position="3466.3333333333335,656.3333333333334">(set: $vidaEnemigo to 0)
+Viajas al aeropuerto y coges el [[avión]].
+&lt;img src=&quot;PugAvion.gif&quot; width=&quot;300px&quot; height=&quot;300px&quot; /&gt;</tw-passagedata><tw-passagedata pid="30" name="Piensas ir de todas maneras" tags="imagen" position="3233.3333333333335,816.3333333333334">Vas al aeropuerto y montas en un avión a [[España]]. 
+&lt;img src=&quot;PugAvion.gif&quot; width=&quot;300px&quot; height=&quot;300px&quot; /&gt;</tw-passagedata><tw-passagedata pid="31" name="avión" tags="" position="3466.3333333333335,806.3333333333334">Tras un par de horas en el cielo aterrizas en [[Alicante]].
+&lt;img src=&quot;PugAvion.gif&quot; width=&quot;300px&quot; height=&quot;300px&quot; /&gt;</tw-passagedata><tw-passagedata pid="32" name="Alicante" tags="" position="3466.3333333333335,956.3333333333334">Estás en la mítica tierra conocida como Alicante.
 &lt;img src=&quot;Alicante.gif&quot; width=&quot;300px&quot; height=&quot;300px&quot; /&gt;
 Tu olfato te guía hasta una casa.
 
-Entras en la [[casa de la señora Matilde]]</tw-passagedata><tw-passagedata pid="33" name="casa de la señora Matilde" tags="" position="2598,1073">La señora Matilde te sirve sus [[croquetas de jamón legendarias]].</tw-passagedata><tw-passagedata pid="34" name="croquetas de jamón legendarias" tags="final" position="507,1065">Están riquísimas.
+Entras en la [[casa de la señora Matilde]]</tw-passagedata><tw-passagedata pid="33" name="casa de la señora Matilde" tags="" position="3466.3333333333335,1106.3333333333333">La señora Matilde te sirve sus [[croquetas de jamón legendarias]].</tw-passagedata><tw-passagedata pid="34" name="croquetas de jamón legendarias" tags="final" position="507,1065">Están riquísimas.
+{(live: 0.5s)[
+    (either: &quot;Ñam ñam ñam&quot;, &quot;Glup ñam greeg&quot;, &quot;Ñam ñam&quot;, &quot;Ñam glup ñam&quot;)
+]}
 
-Fin.</tw-passagedata><tw-passagedata pid="35" name="España" tags="" position="2366.6666666666665,933">Estás en España. Tu olfato te lleva hasta un [[restaurante]].</tw-passagedata><tw-passagedata pid="36" name="restaurante" tags="final" position="652,1070">Comes unas croquetas de bacalao. Están ricas.
+(if: not ($croquetas contains  &quot;Croquetas de jamón legendarias&quot;))[
+	¡Subes cinco niveles!
+	(set: $nivel to $nivel + 1)
+	(set: $croquetas to $croquetas + (a: &quot;Croquetas de jamón legendarias&quot;))
+]
+  =&gt;&lt;=
+(if: $nivel &lt; 10)[
+¿Fin?
 
-Fin.</tw-passagedata><tw-passagedata pid="37" name="Selección de sexo" tags="imagen" position="625,44">(set: $clase to &quot;Basico&quot;, $fuerza to 1, $agilidad to 1, $carisma to 1, $olfato to 10, $nivel to 1)
-Estás en Inglaterra.
+[[Volver al principio-&gt;Reset]]
+](else:)[
+	[[Has completado tu CroQuest]]
+]</tw-passagedata><tw-passagedata pid="35" name="España" tags="" position="3235,966.3333333333334">Estás en España. Tu olfato te lleva hasta un [[restaurante]].</tw-passagedata><tw-passagedata pid="36" name="restaurante" tags="final imagen" position="652,1070">Comes unas croquetas de bacalao. Están ricas.
+(print: &quot;&lt;img src=&#x27;EspanyaRestaurante.gif&#x27; width=&#x27;300px&#x27; height=&#x27;300px&#x27; /&gt;&quot;)
+
+(if: not ($croquetas contains  &quot;Croquetas de bacalao&quot;))[
+	¡Subes dos niveles de golpe!
+	(set: $nivel to $nivel + 2)
+	(set: $croquetas to $croquetas + (a: &quot;Croquetas de bacalao&quot;))
+]
+  =&gt;&lt;=
+(if: $nivel &lt; 10)[
+¿Fin?
+
+[[Volver al principio-&gt;Reset]]
+](else:)[
+	[[Has completado tu CroQuest]]
+]
+</tw-passagedata><tw-passagedata pid="37" name="Selección de sexo" tags="imagen" position="566.6666666666666,42.333333333333336">Estás en Inglaterra.
 &lt;img src=&quot;PugBasico.gif&quot; width=&quot;300px&quot; height=&quot;300px&quot; /&gt;
 [[Eres un pug]]
-[[Eres una pug]]</tw-passagedata><tw-passagedata pid="38" name="Eres un pug" tags="Redireccion" position="434,7">(set: $sexo to &quot;un&quot;)
+[[Eres una pug]]
+(set: $clase to &quot;Basico&quot;, $fuerza to 1, $agilidad to 1, $carisma to 1, $olfato to 10, $nivel to 1, $croquetas to (a:))</tw-passagedata><tw-passagedata pid="38" name="Eres un pug" tags="Redireccion" position="390.6666666666667,0.33333333333333304">(set: $sexo to &quot;un&quot;)
 (go-to: &quot;Elección de protagonista&quot;)
-[[Elección de protagonista]]</tw-passagedata><tw-passagedata pid="39" name="Eres una pug" tags="Redireccion" position="436,129">(set: $sexo to &quot;una&quot;)
+[[Elección de protagonista]]</tw-passagedata><tw-passagedata pid="39" name="Eres una pug" tags="Redireccion" position="396,125.66666666666667">(set: $sexo to &quot;una&quot;)
 (go-to: &quot;Elección de protagonista&quot;)
-[[Elección de protagonista]]</tw-passagedata><tw-passagedata pid="40" name="Muy usada guía de viajes" tags="imagen" position="2203,284">En tu búsqueda del folleto adecuado, llegas hasta una muy usada guía de viajes. 
+[[Elección de protagonista]]</tw-passagedata><tw-passagedata pid="40" name="Muy usada guía de viajes" tags="imagen" position="3071.3333333333335,317.3333333333333">En tu búsqueda del folleto adecuado, llegas hasta una muy usada guía de viajes. 
 (set: $vidaEnemigo to 10)
 (print: &quot;&lt;img src=&#x27;GuiaViajes.gif&#x27; width=&#x27;300px&#x27; height=&#x27;300px&#x27; /&gt;&quot;)
-[[Te ataca con ofertas que no quieres]]</tw-passagedata><tw-passagedata pid="41" name="Buscas un buen paquete de viaje" tags="imagen" position="1300,389">(set: $numeroFolletos to $numeroFolletos + 1)
+[[Te ataca con ofertas que no quieres]]</tw-passagedata><tw-passagedata pid="41" name="Buscas un buen paquete de viaje" tags="imagen" position="1480,597.3333333333334">(set: $numeroFolletos to $numeroFolletos + 1)
 Estás en un verdadero laberinto de ofertas y paquetes de viaje.
 (print: &quot;&lt;img src=&#x27;LaberintoFolletos.gif&#x27; width=&#x27;300px&#x27; height=&#x27;300px&#x27; /&gt;&quot;)
 (if: $numeroFolletos &gt; 15)[
@@ -307,7 +372,7 @@ Estás en un verdadero laberinto de ofertas y paquetes de viaje.
 	  Estás cansándote de esta agencia. 
 	  Quizás deberías [[buscar una tienda-&gt;Vas a una tienda]] aquí.
   ]
-]</tw-passagedata><tw-passagedata pid="42" name="Ofertas de viajes por aire" tags="imagen" position="1598,46">(set: $numeroFolletos to $numeroFolletos + 1)
+]</tw-passagedata><tw-passagedata pid="42" name="Ofertas de viajes por aire" tags="imagen" position="1480,357.6666666666667">(set: $numeroFolletos to $numeroFolletos + 1)
 Estás en un verdadero laberinto de ofertas y paquetes de viaje.
 (print: &quot;&lt;img src=&#x27;LaberintoFolletos.gif&#x27; width=&#x27;300px&#x27; height=&#x27;300px&#x27; /&gt;&quot;)
 (if: $numeroFolletos &gt; 15)[
@@ -317,12 +382,13 @@ Estás en un verdadero laberinto de ofertas y paquetes de viaje.
 		Estás llegando a tu límite...
 	]
 [[Super viaje en jet-&gt;Paquetes de viaje excelsior]]
+[[Paquetes de viaje junior]]
 [[Ves un paquete de folletos de cruceros-&gt;Ofertas de viajes por mar]]
   (if: $numeroFolletos &gt; 9)[
 	  Estás cansándote de esta agencia. 
 	  Quizás deberías [[buscar una tienda-&gt;Vas a una tienda]] aquí.
   ]
-]</tw-passagedata><tw-passagedata pid="43" name="Paquetes de viaje senior" tags="imagen" position="1490,519">(set: $numeroFolletos to $numeroFolletos + 1)
+]</tw-passagedata><tw-passagedata pid="43" name="Paquetes de viaje senior" tags="imagen" position="1790.0000000000002,685.6666666666667">(set: $numeroFolletos to $numeroFolletos + 1)
 Estás en un verdadero laberinto de ofertas y paquetes de viaje.
 (print: &quot;&lt;img src=&#x27;LaberintoFolletos.gif&#x27; width=&#x27;300px&#x27; height=&#x27;300px&#x27; /&gt;&quot;)
 (if: $numeroFolletos &gt; 15)[
@@ -331,15 +397,14 @@ Estás en un verdadero laberinto de ofertas y paquetes de viaje.
 	(if: $numeroFolletos &gt; 12)[
 		Estás llegando a tu límite...
 	]
-[[Paquetes de viaje senior]]
-[[Paquetes de viaje junior]]
+[[Viajes económicos]]
 [[Paquetes de viaje excelsior]]
 [[Viajes senior &quot;cerca del cielo&quot;-&gt;Ofertas de viajes por aire]]
   (if: $numeroFolletos &gt; 9)[
 	  Estás cansándote de esta agencia. 
 	  Quizás deberías [[buscar una tienda-&gt;Vas a una tienda]] aquí.
   ]
-]</tw-passagedata><tw-passagedata pid="44" name="Paquetes de viaje junior" tags="imagen" position="1777,244">(set: $numeroFolletos to $numeroFolletos + 1)
+]</tw-passagedata><tw-passagedata pid="44" name="Paquetes de viaje junior" tags="imagen" position="2133.6666666666665,342.3333333333333">(set: $numeroFolletos to $numeroFolletos + 1)
 Estás en un verdadero laberinto de ofertas y paquetes de viaje.
 (print: &quot;&lt;img src=&#x27;LaberintoFolletos.gif&#x27; width=&#x27;300px&#x27; height=&#x27;300px&#x27; /&gt;&quot;)
 (if: $numeroFolletos &gt; 15)[
@@ -353,7 +418,7 @@ Estás en un verdadero laberinto de ofertas y paquetes de viaje.
 	  Estás cansándote de esta agencia. 
 	  Quizás deberías [[buscar una tienda-&gt;Vas a una tienda]] aquí.
   ]
-]</tw-passagedata><tw-passagedata pid="45" name="Paquetes de viaje excelsior" tags="imagen" position="1415,181">(set: $numeroFolletos to $numeroFolletos + 1)
+]</tw-passagedata><tw-passagedata pid="45" name="Paquetes de viaje excelsior" tags="imagen" position="1703.3333333333333,407.66666666666674">(set: $numeroFolletos to $numeroFolletos + 1)
 Estás en un verdadero laberinto de ofertas y paquetes de viaje.
 (print: &quot;&lt;img src=&#x27;LaberintoFolletos.gif&#x27; width=&#x27;300px&#x27; height=&#x27;300px&#x27; /&gt;&quot;)
 (if: $numeroFolletos &gt; 15)[
@@ -362,13 +427,14 @@ Estás en un verdadero laberinto de ofertas y paquetes de viaje.
 	(if: $numeroFolletos &gt; 12)[
 		Estás llegando a tu límite...
 	]
+[[Paquete especial Diamante]]
 [[Super viaje en jet-&gt;Ofertas de viajes por aire]]
 [[Ves un paquete de folletos de cruceros-&gt;Ofertas de viajes por mar]]
   (if: $numeroFolletos &gt; 9)[
 	  Estás cansándote de esta agencia. 
 	  Quizás deberías [[buscar una tienda-&gt;Vas a una tienda]] aquí.
   ]
-]</tw-passagedata><tw-passagedata pid="46" name="Ofertas de viajes por mar" tags="imagen" position="1930,608">(set: $numeroFolletos to $numeroFolletos + 1)
+]</tw-passagedata><tw-passagedata pid="46" name="Ofertas de viajes por mar" tags="imagen" position="1530,77.99999999999997">(set: $numeroFolletos to $numeroFolletos + 1)
 Estás en un verdadero laberinto de ofertas y paquetes de viaje.
 (print: &quot;&lt;img src=&#x27;LaberintoFolletos.gif&#x27; width=&#x27;300px&#x27; height=&#x27;300px&#x27; /&gt;&quot;)
 (if: $numeroFolletos &gt; 15)[
@@ -378,13 +444,12 @@ Estás en un verdadero laberinto de ofertas y paquetes de viaje.
 		Estás llegando a tu límite...
 	]
 [[Crucero por el Atlántico]]
-[[Paquetes de viaje junior]]
 [[Paquetes de viaje excelsior]]
   (if: $numeroFolletos &gt; 9)[
 	  Estás cansándote de esta agencia. 
 	  Quizás deberías [[buscar una tienda-&gt;Vas a una tienda]] aquí.
   ]
-]</tw-passagedata><tw-passagedata pid="47" name="Crucero por el Atlántico" tags="imagen" position="1718,616">(set: $numeroFolletos to $numeroFolletos + 1)
+]</tw-passagedata><tw-passagedata pid="47" name="Crucero por el Atlántico" tags="imagen" position="1874.6666666666667,112.66666666666671">(set: $numeroFolletos to $numeroFolletos + 1)
 Estás en un verdadero laberinto de ofertas y paquetes de viaje.
 (print: &quot;&lt;img src=&#x27;LaberintoFolletos.gif&#x27; width=&#x27;300px&#x27; height=&#x27;300px&#x27; /&gt;&quot;)
 (if: $numeroFolletos &gt; 15)[
@@ -399,7 +464,7 @@ Estás en un verdadero laberinto de ofertas y paquetes de viaje.
 	  Estás cansándote de esta agencia. 
 	  Quizás deberías [[buscar una tienda-&gt;Vas a una tienda]] aquí.
   ]
-]</tw-passagedata><tw-passagedata pid="48" name="Viaje junior con animales permitidos" tags="imagen" position="1862,53">(set: $numeroFolletos to $numeroFolletos + 1)
+]</tw-passagedata><tw-passagedata pid="48" name="Viaje junior con animales permitidos" tags="imagen" position="2122,84.66666666666666">(set: $numeroFolletos to $numeroFolletos + 1)
 Estás en un verdadero laberinto de ofertas y paquetes de viaje.
 (print: &quot;&lt;img src=&#x27;LaberintoFolletos.gif&#x27; width=&#x27;300px&#x27; height=&#x27;300px&#x27; /&gt;&quot;)
 (if: $numeroFolletos &gt; 15)[
@@ -413,7 +478,7 @@ Estás en un verdadero laberinto de ofertas y paquetes de viaje.
 	  Estás cansándote de esta agencia. 
 	  Quizás deberías [[buscar una tienda-&gt;Vas a una tienda]] aquí.
   ]
-]</tw-passagedata><tw-passagedata pid="49" name="Viaje junior con animales permitidos de precio razonable" tags="imagen" position="2042,51">(set: $numeroFolletos to $numeroFolletos + 1)
+]</tw-passagedata><tw-passagedata pid="49" name="Viaje junior con animales permitidos de precio razonable" tags="imagen" position="2453.6666666666665,72.66666666666667">(set: $numeroFolletos to $numeroFolletos + 1)
 Estás en un verdadero laberinto de ofertas y paquetes de viaje.
 (print: &quot;&lt;img src=&#x27;LaberintoFolletos.gif&#x27; width=&#x27;300px&#x27; height=&#x27;300px&#x27; /&gt;&quot;)
 (if: $numeroFolletos &gt; 15)[
@@ -427,7 +492,7 @@ Estás en un verdadero laberinto de ofertas y paquetes de viaje.
 	  Estás cansándote de esta agencia. 
 	  Quizás deberías [[buscar una tienda-&gt;Vas a una tienda]] aquí.
   ]
-]</tw-passagedata><tw-passagedata pid="50" name="Viaje junior con animales permitidos de precio razonable con buena comida" tags="imagen" position="1980,186">(set: $numeroFolletos to $numeroFolletos + 1)
+]</tw-passagedata><tw-passagedata pid="50" name="Viaje junior con animales permitidos de precio razonable con buena comida" tags="imagen" position="2415,347.66666666666674">(set: $numeroFolletos to $numeroFolletos + 1)
 Estás en un verdadero laberinto de ofertas y paquetes de viaje.
 (print: &quot;&lt;img src=&#x27;LaberintoFolletos.gif&#x27; width=&#x27;300px&#x27; height=&#x27;300px&#x27; /&gt;&quot;)
 (if: $numeroFolletos &gt; 15)[
@@ -442,7 +507,11 @@ Estás en un verdadero laberinto de ofertas y paquetes de viaje.
 	  Estás cansándote de esta agencia. 
 	  Quizás deberías [[buscar una tienda-&gt;Vas a una tienda]] aquí.
   ]
-]</tw-passagedata><tw-passagedata pid="51" name="Usas tus Ladridos Abucheantes" tags="" position="2697,337">Ladras varias canciones bochornosas hasta que la Guía de Viaje muy Usada pìde clemencia y te señala [[lo que buscas-&gt;¡Encuentras el viaje que buscabas!]].</tw-passagedata><tw-passagedata pid="52" name="Contactos en las Altas Perreras para ser tratado como es debido" tags="" position="484,666">Tras una llamada rápida a tu viejo amigo Lord Mordisquitos, dueño de esta cadena de ultramarinos, el Queso Francés recibe a su vez una llamada que, por la cara que pone, no es muy agradable. 
+]</tw-passagedata><tw-passagedata pid="51" name="Usas tus Ladridos Abucheantes" tags="imagen" position="3565.3333333333335,370.3333333333333">{(live: 0.5s)[
+    (either: &quot;¡Guau Guau Guau!&quot;, &quot;¡Woof!&quot;, &quot;¡Grrrr Guau Woof!&quot;, &quot;¡RRRRggghhhau!&quot;)
+]}
+(print: &quot;&lt;img src=&#x27;LadridosAbucheantes.gif&#x27; width=&#x27;300px&#x27; height=&#x27;300px&#x27; /&gt;&quot;)
+Ladras varias canciones bochornosas hasta que la Guía de Viaje muy Usada pìde clemencia y te señala [[lo que buscas-&gt;¡Encuentras el viaje que buscabas!]].</tw-passagedata><tw-passagedata pid="52" name="Contactos en las Altas Perreras para ser tratado como es debido" tags="" position="484,666">Tras una llamada rápida a tu viejo amigo Lord Mordisquitos, dueño de esta cadena de ultramarinos, el Queso Francés recibe a su vez una llamada que, por la cara que pone, no es muy agradable. 
 (print: &quot;&lt;img src=&#x27;QuesoFrances.gif&#x27; width=&#x27;300px&#x27; height=&#x27;300px&#x27; /&gt;&quot;)
 Se gira hacia ti y te ofrece una sincera disculpa, e indica que la [[tienda está a tu disposición-&gt;¡Victoria!]].</tw-passagedata><tw-passagedata pid="53" name="Queso Francés" tags="habilidad-especial" position="591,510">Nada más entrar, un queso francés te golpea con su olor. ¡Y con sus puños!
 (print: &quot;&lt;img src=&#x27;QuesoFrances.gif&#x27; width=&#x27;300px&#x27; height=&#x27;300px&#x27; /&gt;&quot;)
@@ -450,7 +519,74 @@ Se gira hacia ti y te ofrece una sincera disculpa, e indica que la [[tienda est�
 [[Defiéndete]]
 (if: $habilidadEspecial is &quot;Contactos en las altas perreras&quot;)[
 	Puedes hacer una llamada rápida a uno de tus [[Contactos en las Altas Perreras para ser tratado como es debido]].
-]</tw-passagedata></tw-storydata>
+]</tw-passagedata><tw-passagedata pid="54" name="Paquete especial Diamante" tags="imagen" position="1886.6666666666667,357.6666666666667">(set: $numeroFolletos to $numeroFolletos + 1)
+Estás en un verdadero laberinto de ofertas y paquetes de viaje.
+(print: &quot;&lt;img src=&#x27;LaberintoFolletos.gif&#x27; width=&#x27;300px&#x27; height=&#x27;300px&#x27; /&gt;&quot;)
+(if: $numeroFolletos &gt; 15)[
+	[[No puedes más-&gt;Decides que las croquetas de patata no están tan mal]]
+](else:)[
+	(if: $numeroFolletos &gt; 12)[
+		Estás llegando a tu límite...
+	]
+[[Paquete especial Oro]]
+[[Super viaje en jet-&gt;Ofertas de viajes por aire]]
+  (if: $numeroFolletos &gt; 9)[
+	  Estás cansándote de esta agencia. 
+	  Quizás deberías [[buscar una tienda-&gt;Vas a una tienda]] aquí.
+  ]
+]</tw-passagedata><tw-passagedata pid="55" name="Paquete especial Oro" tags="imagen" position="2078.333333333333,522.6666666666667">(set: $numeroFolletos to $numeroFolletos + 1)
+Estás en un verdadero laberinto de ofertas y paquetes de viaje.
+(print: &quot;&lt;img src=&#x27;LaberintoFolletos.gif&#x27; width=&#x27;300px&#x27; height=&#x27;300px&#x27; /&gt;&quot;)
+(if: $numeroFolletos &gt; 15)[
+	[[No puedes más-&gt;Decides que las croquetas de patata no están tan mal]]
+](else:)[
+	(if: $numeroFolletos &gt; 12)[
+		Estás llegando a tu límite...
+	]
+[[Paquete especial Diamante]]
+[[Super viaje en barco-&gt;Crucero por el Atlántico]]
+  (if: $numeroFolletos &gt; 9)[
+	  Estás cansándote de esta agencia. 
+	  Quizás deberías [[buscar una tienda-&gt;Vas a una tienda]] aquí.
+  ]
+]</tw-passagedata><tw-passagedata pid="56" name="Viajes económicos" tags="imagen" position="2005.0000000000002,700.6666666666667">(set: $numeroFolletos to $numeroFolletos + 1)
+Estás en un verdadero laberinto de ofertas y paquetes de viaje.
+(print: &quot;&lt;img src=&#x27;LaberintoFolletos.gif&#x27; width=&#x27;300px&#x27; height=&#x27;300px&#x27; /&gt;&quot;)
+(if: $numeroFolletos &gt; 15)[
+	[[No puedes más-&gt;Decides que las croquetas de patata no están tan mal]]
+](else:)[
+	(if: $numeroFolletos &gt; 12)[
+		Estás llegando a tu límite...
+	]
+[[Viajes muy económicos]]
+[[Paquetes de viaje senior]]
+  (if: $numeroFolletos &gt; 9)[
+	  Estás cansándote de esta agencia. 
+	  Quizás deberías [[buscar una tienda-&gt;Vas a una tienda]] aquí.
+  ]
+]</tw-passagedata><tw-passagedata pid="57" name="Viajes muy económicos" tags="" position="2273.3333333333335,649">Double-click this passage to edit it.(set: $numeroFolletos to $numeroFolletos + 1)
+Estás en un verdadero laberinto de ofertas y paquetes de viaje.
+(print: &quot;&lt;img src=&#x27;LaberintoFolletos.gif&#x27; width=&#x27;300px&#x27; height=&#x27;300px&#x27; /&gt;&quot;)
+(if: $numeroFolletos &gt; 15)[
+	[[No puedes más-&gt;Decides que las croquetas de patata no están tan mal]]
+](else:)[
+	(if: $numeroFolletos &gt; 12)[
+		Estás llegando a tu límite...
+	]
+[[Viajes económicos]]
+[[Viajes senior &quot;cerca del cielo&quot;-&gt;Ofertas de viajes por aire]]
+  (if: $numeroFolletos &gt; 9)[
+	  Estás cansándote de esta agencia. 
+	  Quizás deberías [[buscar una tienda-&gt;Vas a una tienda]] aquí.
+  ]
+]</tw-passagedata><tw-passagedata pid="58" name="Reset" tags="Redireccion" position="83.33333333333326,592.5">(set: $vidaEnemigo to 0)
+(set: $numeroFolletos to 0)
+[[Vives en el Reino Unido]]
+(go-to: &quot;Vives en el Reino Unido&quot;)</tw-passagedata><tw-passagedata pid="59" name="Has completado tu CroQuest" tags="" position="418.6666666666667,1355">Vives feliz el resto de tu vida, rodeado de croquetas.
+
+(print: &quot;&lt;img class=&#x27;floatLeft&#x27; src=&#x27;CroquetasCongeladas.gif&#x27; width=&#x27;300px&#x27; height=&#x27;300px&#x27; /&gt;&quot;)(print: &quot;&lt;img class=&#x27;floatLeft&#x27; src=&#x27;CroquetasPatata.gif&#x27; width=&#x27;300px&#x27; height=&#x27;300px&#x27; /&gt;&quot;)(print: &quot;&lt;img class=&#x27;floatLeft&#x27; src=&#x27;Pug&quot; + $clase + &quot;.gif&#x27; width=&#x27;300px&#x27; height=&#x27;300px&#x27; /&gt;&quot;)(print: &quot;&lt;img class=&#x27;floatLeft&#x27; src=&#x27;EspanyaRestaurante.gif&#x27; width=&#x27;300px&#x27; height=&#x27;300px&#x27; /&gt;&quot;)
+  =&gt;&lt;=
+FIN</tw-passagedata></tw-storydata>
 
 <script title="Twine engine code" data-main="harlowe">"use strict";function _defineProperty(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}function _toConsumableArray(e){if(Array.isArray(e)){for(var t=0,n=Array(e.length);t<e.length;t++)n[t]=e[t];return n}return Array.from(e)}var _slicedToArray=function(){function e(e,t){var n=[],r=!0,i=!1,o=void 0;try{for(var a,s=e[Symbol.iterator]();!(r=(a=s.next()).done)&&(n.push(a.value),!t||n.length!==t);r=!0);}catch(e){i=!0,o=e}finally{try{!r&&s.return&&s.return()}finally{if(i)throw o}}return n}return function(t,n){if(Array.isArray(t))return t;if(Symbol.iterator in Object(t))return e(t,n);throw new TypeError("Invalid attempt to destructure non-iterable instance")}}(),_typeof="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e};!function(){/**
  * @license almond 0.3.3 Copyright jQuery Foundation and other contributors.
